@@ -1,0 +1,57 @@
+    public float Speed;
+    public Text CountText;
+    public Text WinText;
+    public Text DeathText;
+    public GameObject Player;
+   
+
+    private Rigidbody _rb;
+    private int _count;
+
+    private void Start ()
+    {
+        _rb = GetComponent<Rigidbody>();
+        _count = 0;
+        SetCountText();
+        WinText.text = "";
+        
+    }
+
+    private void FixedUpdate ()
+    {
+        var moveHorizontal = Input.GetAxis ("Horizontal");
+        var moveVertical = Input.GetAxis ("Vertical");
+        
+        
+        var movement = new Vector3 (moveHorizontal, 0.0f, moveVertical);
+
+        _rb.AddForce(movement * Speed);
+
+        Speed = Input.GetKey(KeyCode.Space) ? 7f : 15f;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("PickUp"))
+        {
+            other.gameObject.SetActive(false);
+            _count = _count + 1;
+            SetCountText();
+        }
+        if (!other.gameObject.CompareTag("Death")) return;
+        DeathText.text = "You Died! Press Enter to Restart";
+        Player.SetActive(false);
+        {
+            Debug.Log("Successful Death");
+        }
+    }
+
+    private void SetCountText()
+    {
+        CountText.text = "Count: " + _count.ToString();
+        if (_count >= 16)
+        {
+            WinText.text = "You Win! ";
+        }
+    }
+}
