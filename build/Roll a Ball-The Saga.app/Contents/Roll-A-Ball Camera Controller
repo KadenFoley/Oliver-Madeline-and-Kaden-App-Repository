@@ -1,0 +1,33 @@
+public class CameraController : MonoBehaviour
+{
+
+	public GameObject Player;
+
+	private Vector3 _offset;
+
+	private void Start()
+	{
+		_offset = transform.position - Player.transform.position;
+	}
+	private void LateUpdate()
+	{
+		transform.position = Player.transform.position + _offset;
+	}
+
+	private void Update()
+	{
+		if (Input.GetKey(KeyCode.Return))
+		{
+			StartCoroutine(LoadScene2());
+		}
+	}
+
+	private static IEnumerator LoadScene2()
+	{
+		var asyncLoad = SceneManager.LoadSceneAsync(1);
+		while (!asyncLoad.isDone)
+		{
+			yield return null;
+		}
+	}
+}
