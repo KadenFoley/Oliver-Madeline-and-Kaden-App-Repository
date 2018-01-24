@@ -1,0 +1,57 @@
+import Tkinter as tk
+x=tk.Tk()
+title=x.title("GUI global speed counter")
+from Tkinter import *
+root = Tk()
+
+Speed = 0
+pressed_confirm = 0
+times_pressed = 0
+
+def checked():
+    #pressed_confirm
+    global pressed_confirm
+    pressed_confirm = pressed_confirm + 1
+    if pressed_confirm > 1:
+        pressed_confirm = 0
+    pass
+
+def pressed():
+    global times_pressed
+    if pressed_confirm == 1:
+        times_pressed = times_pressed + goodbars / 2
+    else:
+        times_pressed = times_pressed + goodbars
+
+        editor.insert(END, times_pressed)
+    editor.see(END)
+
+
+box = Checkbutton(root, text="Enable Friction", command=checked)
+box.grid(row=0, column=0)
+
+drawpad = Canvas(root, background='blue')
+drawpad.grid(row=0, column=1)
+item = drawpad.create_oval(50, 50, 100, 100, fill= 'purple')
+item = drawpad.create_rectangle(80, 90, 175, 100, fill='cyan')
+
+editor = Text(width=30, height=4)
+editor.grid(row=2, column=1, rowspan=2, sticky=SE)
+
+button = Button(root, text='Add Player Speed',
+                command=pressed)
+button.grid(row=1, column=0)
+
+def Test(event):
+    global goodbars
+    print slider.get()
+    goodbars=slider.get()
+
+speed = IntVar()
+slider = Scale(root, from_=-5, to=5, label='Speed Increment', variable=speed, command=Test)
+slider.grid(row=2, column=0)
+slider.get()
+print slider.get()
+
+
+root.mainloop()
