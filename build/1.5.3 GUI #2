@@ -1,0 +1,70 @@
+import Tkinter as tk
+x=tk.Tk()
+title=x.title("GUI global speed counter")
+from Tkinter import *
+root = Tk()
+
+Speed = 0
+pressed_confirm = 0
+times_pressed = 0
+
+def checked():
+    global pressed_confirm
+    pressed_confirm = pressed_confirm + 1
+    if pressed_confirm > 1:
+        pressed_confirm = 0
+    pass
+
+def pressed():
+    global times_pressed
+    if pressed_confirm == 1:
+        times_pressed = times_pressed + slidervar / 2
+        if times_pressed > 135 or times_pressed < -135:
+            times_pressed = 135
+            print "Your player can't go any faster"
+        editor.insert(END, times_pressed)
+    else:
+        times_pressed = times_pressed + slidervar
+        if times_pressed > 135 or times_pressed < -135:
+            times_pressed = 135
+            print "Your player can't go any faster"
+        editor.insert(END, times_pressed)
+    if times_pressed > 35 or times_pressed < -35:
+        print("Speed Greater than 35m/s")
+        drawpad.delete("all")
+        item = drawpad.create_oval(50, 50, 100, 100, fill= 'purple')
+        item = drawpad.create_rectangle(80, 90, 175, 100, fill='cyan')
+    else:
+        drawpad.delete("all")
+        item = drawpad.create_oval(50, 50, 200, 200, fill='red')
+        item = drawpad.create_rectangle(50, 150, 200, 10, fill='white')
+    editor.see(END)
+
+
+box = Checkbutton(root, text="Enable Friction", command=checked)
+box.grid(row=0, column=0)
+
+drawpad = Canvas(root, background='blue')
+drawpad.grid(row=0, column=1)
+
+editor = Text(width=50, height=5)
+editor.grid(row=2, column=1, rowspan=2, sticky=SE)
+
+button = Button(root, text='Add Player Speed',
+                command=pressed)
+button.grid(row=1, column=0)
+
+def Test(event):
+    global slidervar
+    print slider.get()
+    slidervar=slider.get()
+
+speed = IntVar()
+slider = Scale(root, from_=5, to=-5, label='Speed Increment', variable=speed, command=Test)
+slider.grid(row=2, column=0)
+slider.get()
+print slider.get()
+
+
+root.update
+root.mainloop()
