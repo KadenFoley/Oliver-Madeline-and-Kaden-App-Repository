@@ -1,0 +1,51 @@
+import Tkinter as tk
+from Tkinter import *
+root = Tk()
+
+def pressed(event):
+
+    slider.get()
+    if slider.get() is 0:
+        Canvas.delete(all)
+        drawpad = Canvas(root, background='blue')
+        drawpad.grid(row=1, column=1)
+    if slider.get() is 1:
+        Canvas.delete(all)
+        drawpad = Canvas(root, background='light blue')
+        drawpad.grid(row=1, column=1)
+    if slider.get() is 2:
+        Canvas.delete(all)
+        drawpad = Canvas(root, background='light green')
+        drawpad.grid(row=1, column=1)
+    if slider.get() is 3:
+        Canvas.delete(all)
+        drawpad = Canvas(root, background='green')
+        drawpad.grid(row=1, column=1)
+    if slider.get() is 4:
+        Canvas.delete(all)
+        drawpad = Canvas(root, background='dark green')
+        drawpad.grid(row=1, column=1)
+    if slider.get() is 5:
+        Canvas.delete(all)
+        drawpad = Canvas(root, background='dark blue')
+        drawpad.grid(row=1, column=1)
+
+button = Button(root, text='Scroll',command=pressed)
+button.grid(row=1, column=0)
+
+def Test(event):
+    global slidervar
+    print slider.get()
+    slidervar=slider.get()
+
+drawpad = Canvas(root, background='white')
+drawpad.grid(row=1, column=2)
+
+speed = IntVar()
+slider = Scale(root, from_=5, to=-5, label='Slide Across the Window', variable=speed, command=Test)
+slider.grid(row=2, column=0)
+slider.get()
+print slider.get()
+
+
+root.mainloop()
