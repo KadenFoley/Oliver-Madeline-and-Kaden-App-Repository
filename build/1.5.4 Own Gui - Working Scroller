@@ -1,0 +1,70 @@
+import Tkinter as tk
+from Tkinter import *
+root = Tk()
+
+drawpad = 0
+
+def Test(event):
+    global slidevar
+    print slider.get()
+    slidevar = slider.get()
+    global drawpad
+    if slidevar is -1:
+        drawpad.grid_forget()
+        drawpad = Canvas(root, background='green')
+        drawpad.grid(row=1, column=1)
+    if slidevar is -2:
+        drawpad.grid_forget
+        drawpad = Canvas(root, background='yellow')
+        drawpad.grid(row=1, column=1)
+    if slidevar is -3:
+        drawpad.grid_forget
+        drawpad = Canvas(root, background='orange')
+        drawpad.grid(row=1, column=1)
+    if slidevar is -4:
+        drawpad.grid_forget
+        drawpad = Canvas(root, background='red')
+        drawpad.grid(row=1, column=1)
+    if slidevar is -5:
+        drawpad.grid_forget
+        drawpad = Canvas(root, background='pink')
+        drawpad.grid(row=1, column=1)
+    if slidevar is 0:
+        drawpad.grid_forget()
+        drawpad = Canvas(root, background='light blue')
+        drawpad.grid(row=1, column=1)
+    if slidevar is 1:
+        drawpad.grid_forget()
+        drawpad = Canvas(root, background='blue')
+        drawpad.grid(row=1, column=1)
+    if slidevar is 2:
+        drawpad.grid_forget
+        drawpad = Canvas(root, background='dark blue')
+        drawpad.grid(row=1, column=1)
+    if slidevar is 3:
+        drawpad.grid_forget
+        drawpad = Canvas(root, background='purple')
+        drawpad.grid(row=1, column=1)
+    if slidevar is 4:
+        drawpad.grid_forget
+        drawpad = Canvas(root, background='gray')
+        drawpad.grid(row=1, column=1)
+    if slidevar is 5:
+        drawpad.grid_forget
+        drawpad = Canvas(root, background='black')
+        drawpad.grid(row=1, column=1)
+
+button = Button(root, text='Scroll')
+button.grid(row=1, column=0)
+
+
+drawpad = Canvas(root, background='white')
+drawpad.grid(row=1, column=2)
+
+speed = IntVar()
+slider = Scale(root, from_=5, to=-5, label='Slide Across the Window', variable=speed, command=Test)
+slider.grid(row=2, column=0)
+slider.get()
+print slider.get()
+
+root.mainloop()
